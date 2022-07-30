@@ -25,7 +25,7 @@ app.use(clothesRoutes);
 
 // Our Error Handlers -- need to be the last things defined!
 // These use the external modules we required above
-app.use('*', notFoundHandler);
+// app.use('*', notFoundHandler);
 app.use(errorHandler);
 
 // Export an object with the express app and separate method that can start the server

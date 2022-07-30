@@ -12,6 +12,7 @@ const foodSchema = require("./food/model.js");
 const clothesSchema = require("./clothes/model.js");
 const recipeSchema = require("./recipe/model.js");
 const foodRecipeSchema = require("./foodRecipe/model.js");
+// const userSchema = require("../auth-server/app.js");
 
 const sequelizeOptions =
   process.env.NODE_ENV === "production"
@@ -26,11 +27,12 @@ const sequelizeOptions =
     : {};
 
 // turn schemas into Sequelize models
-const sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
+const sequelize = new Sequelize("sqlite::memory", sequelizeOptions);
 const FoodModel = foodSchema(sequelize, DataTypes);
 const ClothesModel = clothesSchema(sequelize, DataTypes);
 const RecipeModel = recipeSchema(sequelize, DataTypes);
 const FoodRecipeModel = foodRecipeSchema(sequelize, DataTypes);
+// const UserModel = userSchema(sequelize, DataTypes);
 
 // create our Collections and associations
 const FoodCollection = new Collection(FoodModel);
@@ -39,10 +41,13 @@ const RecipeCollection = new Collection(RecipeModel);
 FoodCollection.belongsToManyThrough(RecipeCollection, FoodRecipeModel);
 RecipeCollection.belongsToManyThrough(FoodCollection, FoodRecipeModel);
 
+// const UserCollection = new Collection(UserModel);
+
 module.exports = {
   db: sequelize,
   Food: FoodCollection,
   Clothes: ClothesCollection,
   Recipe: RecipeCollection,
   FoodRecipe: FoodRecipeModel,
+  // User: UserCollection,
 };
