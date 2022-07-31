@@ -25,6 +25,7 @@ app.use(logger);
 app.use(foodRoutes);
 app.use(clothesRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 
 // Our Error Handlers -- need to be the last things defined!
 // These use the external modules we required above
