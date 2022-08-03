@@ -1,15 +1,15 @@
-# Authentication
+# Bearer Authorization
 
-## Auth System Phase 1
+## Auth System Phase 2
 
 ### Author: Luis Sandoval
 
-### Collaborators: Derek Douglas, Sarah Teklemariam
+### Collaborators: Hugo Thompson, Zayah Lang, Jim Doyle
 
 ### Links
 
-- [PR](https://github.com/luismsandoval/auth-lab/pull/1)
+- [PR](https://github.com/luismsandoval/auth-lab/pull/2)
 
 ### Time Estimate
 
-- 5 hours
+- 4 hours
