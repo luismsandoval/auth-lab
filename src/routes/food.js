@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-const express = require('express');
+const express = require("express");
 
-const FoodCollection = require('../models/index.js').Food;
-
+const FoodCollection = require("../models/index.js").Food;
+const validateToken = require("../middleware/auth/auth.js");
 // const app = express();
 
 const router = express.Router();
 
 // RESTful Route Declarations
-router.get('/food', getFood);
-router.get('/food/:id', getOneFood);
-router.post('/food', createFood);
-router.put('/food/:id', updateFood);
-router.delete('/food/:id', deleteFood);
+router.get("/food", getFood);
+router.get("/food/:id", getOneFood);
+router.post("/food", createFood);
+router.put("/food/:id", updateFood);
+router.delete("/food/:id", validateToken, deleteFood);
 
 // RESTful Route Handlers
 async function getFood(req, res) {
@@ -41,9 +41,13 @@ async function updateFood(req, res) {
 }
 
 async function deleteFood(req, res) {
-  let id = req.params.id;
-  let deletedFood = await FoodCollection.delete(id);
-  res.status(200).json(deletedFood);
+  if (req.user?.role !== "admin") {
+    res.status(403).send(req.user);
+  } else {
+    let id = req.params.id;
+    let deletedFood = await FoodCollection.delete(id);
+    res.status(200).json(deletedFood);
+  }
 }
 
 module.exports = router;
